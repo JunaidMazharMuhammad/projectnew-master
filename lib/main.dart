@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
+import 'package:project/Compass.dart';
 import "package:google_maps_webservice/geocoding.dart";
 import 'package:geo_location_finder/geo_location_finder.dart';
 import 'package:google_maps_webservice/places.dart';
@@ -155,6 +155,8 @@ class _MyAppState extends State<MyApp> {
 
   }
 
+
+
   Future _onMapCreated(GoogleMapController controller) async {
     Map<dynamic, dynamic> locationMap;
     String result;
@@ -186,10 +188,6 @@ class _MyAppState extends State<MyApp> {
     catch(e){
 
     }
-
-
-
-
      _controller.complete(controller);
 
   }
@@ -231,7 +229,7 @@ class _MyAppState extends State<MyApp> {
 
               onCameraMove: _onCameraMove,
 
-              myLocationEnabled: true,
+              myLocationEnabled:true,
 
             ),
 
@@ -248,6 +246,8 @@ class _MyAppState extends State<MyApp> {
 
 
                   children: <Widget>[
+
+                    SizedBox(height: 60.0),
 
 
                     FloatingActionButton(
@@ -280,8 +280,10 @@ class _MyAppState extends State<MyApp> {
                     SizedBox(height: 16.0),
 
                     FloatingActionButton(
-                      onPressed: _setLocation,
-
+                      onPressed: (){
+                        Route route = MaterialPageRoute(builder: (context) => Compass());
+                        Navigator.push(context, route);
+                        },
 
                       materialTapTargetSize: MaterialTapTargetSize.padded,
 
@@ -291,6 +293,7 @@ class _MyAppState extends State<MyApp> {
 
 
                     ),
+
 
 
                   ],
@@ -311,4 +314,9 @@ class _MyAppState extends State<MyApp> {
 
   }
 
+  void openCompass() async {
+
+
+    Navigator.of(context).pushNamed('/compass');
+  }
 }
