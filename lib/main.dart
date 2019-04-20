@@ -101,7 +101,7 @@ class _MyAppState extends State<MyApp> {
 
   void _onAddMarkerButtonPressed() async {
 
-
+    _goToTheLocation();
     var location = Location(_center.latitude,_center.longitude);
 
     final result = await _places.searchByText("Masjid",location: location, radius: 1000,type: "Masjid");
@@ -140,6 +140,8 @@ class _MyAppState extends State<MyApp> {
       });
 
     });
+
+
   }
 
 
@@ -147,7 +149,11 @@ class _MyAppState extends State<MyApp> {
   void _onCameraMove(CameraPosition position) {
     _lastMapPosition = position.target;
   }
+  Future<void> _goToTheLocation() async {
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newLatLngZoom(_center,17));
 
+  }
 
   Future _onMapCreated(GoogleMapController controller) async {
     Map<dynamic, dynamic> locationMap;
@@ -164,6 +170,7 @@ class _MyAppState extends State<MyApp> {
           result = "Location: ($lat, $lng)";
 
           _center=LatLng(double.parse(lat),double.parse(lng));
+
 //          print(double.parse(lat));
         } else {
           // lat and lng are not string, you need to check the data type and use accordingly.
