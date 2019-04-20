@@ -214,7 +214,6 @@ class _MyAppState extends State<MyApp> {
 
               onMapCreated: _onMapCreated,
 
-
               initialCameraPosition: CameraPosition(
 
                 target: _center,
